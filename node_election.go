@@ -274,3 +274,8 @@ func (ne *NodeElect) TransferLeadership(ctx context.Context, lead, transferee ui
 func (ne *NodeElect) ReadIndex(ctx context.Context, rctx []byte) error {
 	return ErrReadIndex
 }
+
+func (ne *NodeElect) IsLeader() bool {
+	e := ne.rne.election
+	return e.lead == e.id
+}

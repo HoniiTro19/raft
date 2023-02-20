@@ -214,6 +214,8 @@ type Node interface {
 	ReportSnapshot(id uint64, status SnapshotStatus)
 	// Stop performs any necessary termination of the Node.
 	Stop()
+	// Check the leadship of the Node.
+	IsLeader() bool
 }
 
 type Peer struct {
@@ -577,4 +579,9 @@ func (n *node) TransferLeadership(ctx context.Context, lead, transferee uint64) 
 
 func (n *node) ReadIndex(ctx context.Context, rctx []byte) error {
 	return n.step(ctx, pb.Message{Type: pb.MsgReadIndex, Entries: []pb.Entry{{Data: rctx}}})
+}
+
+func (n *node) IsLeader() bool {
+	r := n.rn.raft
+	return r.lead == r.id
 }
