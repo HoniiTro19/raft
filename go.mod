@@ -1,4 +1,4 @@
-module go.etcd.io/raft/v3
+module github.com/HoniiTro19/raft
 
 go 1.19
 
