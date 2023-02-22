@@ -163,7 +163,6 @@ func (ne *NodeElect) run() {
 		case c := <-ne.status:
 			c <- getStatusElect(e)
 		case <-ne.stop:
-			e.logger.Info("go down and stop service", zap.Uint64("member", e.id))
 			close(ne.done)
 			return
 		}
